@@ -28,3 +28,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Extra Files ###
+.idea/
+Banking System.iml
