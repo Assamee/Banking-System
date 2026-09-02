@@ -20,8 +20,15 @@ public class Main {
 
         try (Scanner scanner = new Scanner(System.in)) {
             String accountHolder = scanner.nextLine();
+
+            while (accountHolder.isBlank()) {
+                System.out.print("That is an invalid name. Try again: ");
+                accountHolder = scanner.nextLine();
+            }
+
             Account account1 = new Account(accountHolder);
             System.out.println("You have created an account!");
+            viewAccountUser(account1);
 
             // Labelled Break
             exitProgram:
@@ -31,11 +38,15 @@ public class Main {
                             1. View Balance
                             2. Deposit Amount
                             3. Withdraw Amount
-                            4. Exit Program
+                            4. View Account Holder
+                            5. Change Account Holder
+                            6. Exit Program
                         """);
 
                 try {
+                    // Gets the input and leaves the newline string in the buffer
                     int option = scanner.nextInt();
+                    scanner.nextLine();
 
                     switch (option) {
                         // View Balance
@@ -44,17 +55,19 @@ public class Main {
                         case 2 -> { depositAmount(scanner, account1); }
                         // Withdraw amount
                         case 3 -> { withdrawAmount(scanner, account1); }
+                        // View Account Holder
+                        case 4 -> { viewAccountUser(account1); }
+                        // Change Account Holder
+                        case 5 -> { changeAccountHolder(scanner, account1); }
                         // Exit Program
-                        case 4 -> { break exitProgram; }
+                        case 6 -> { break exitProgram; }
                         // Invalid option
                         default -> { System.out.printf("%d is an invalid choice\n", option); }
                     }
                 } catch (InputMismatchException | NumberFormatException e){
                     System.out.println("Invalid Input");
-                    scanner.nextLine();
                 }
             }
-
 
 
         } finally {
@@ -63,6 +76,15 @@ public class Main {
     }
     private static void viewBalance(Account account){
         System.out.printf("Your current balance is: £%.2f\n\n", account.getBalance());
+    }
+    private static void viewAccountUser(Account account){
+        System.out.printf("The account holder is: %s\n\n", account.getAccountHolder());
+    }
+    private static void changeAccountHolder(Scanner scanner, Account account) {
+        System.out.print("Enter the name of the new Account Holder: ");
+        String newAccountHolder = scanner.nextLine();
+        account.setAccountHolder(newAccountHolder);
+        viewAccountUser(account);
     }
     private static void depositAmount(Scanner scanner, Account account){
         System.out.println("Choose an amount to deposit: ");
