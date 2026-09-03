@@ -11,9 +11,13 @@ public class Main {
         //
         //      ArrayLists for multiple accounts (switch account option on main screen)
         //          To choose between accounts use for (i) inside a switch case
-        //      More OOP stuff for different account types and account hierarchy
+        //      More OOP stuff for different account types and account hierarchy:
+        //          Current Accounts (Overdraft)
+        //          Saving Accounts (interest)
+        //          Credit Card Account (debt/repay)
 
 
+    }}/*
 
         System.out.println("Welcome to my Bank");
         System.out.print("Type in the name of the account holder to create an account: ");
@@ -134,5 +138,5 @@ public class Main {
         }
     }
 
-
-}
+*/
+//}

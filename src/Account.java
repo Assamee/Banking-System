@@ -9,6 +9,7 @@ public class Account {
     private final int accountID;
 
 
+
     // Constructor
     Account(String accountHolder){
         this.accountHolder = accountHolder;
@@ -27,6 +28,10 @@ public class Account {
     public BigDecimal getBalance(){
         return this.balance;
     }
+    // Protected so it can be called by subclasses, but not Main
+    protected BigDecimal getMinimumBalance() {
+        return BigDecimal.ZERO;
+    }
 
     // Setters
     public void setAccountHolder(String newName){
@@ -43,7 +48,7 @@ public class Account {
 
         // If the withdrawal doesn't result in a negative balance, go ahead with the transaction
         // .compareTo() returns -1(<), 0(=), or 1(>)
-        if (newBalance.compareTo(BigDecimal.ZERO) >= 0) {
+        if (newBalance.compareTo(getMinimumBalance()) >= 0) {
             this.balance = newBalance;
         } else {
             throw new InsufficientFundsException(
